@@ -92,10 +92,10 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         # Add your code below
         # Learn a mac address to avoid FLOOD next time 		
-	    self.mac_to_port[dpid][src] = msg.in_port
+        self.mac_to_port[dpid][src] = msg.in_port
         # If the mac_dst still not learned flood the packet
         
-	    if dst in self.mac_to_port(dpid):
+        if dst in self.mac_to_port(dpid):
             out_port = self.mac_to_port[dpid][dst]
         else:
             out_port = ofproto.OFPP_FLOOD
@@ -109,11 +109,11 @@ class SimpleSwitch13(app_manager.RyuApp):
             # flow_mod & packet_out
             if msg.buffer_id != ofproto.OFP_NO_BUFFER:
                 #add flow
-	            self.add_flow(datapath,1,match,actions,msg.buffer_id)
+                self.add_flow(datapath,1,match,actions,msg.buffer_id)
                 return
             else:
                #add flow
-		       self.add_flow(datapath,1,match,actions)
+                self.add_flow(datapath,1,match,actions)
             
         data = None
         if msg.buffer_id == ofproto.OFP_NO_BUFFER:
